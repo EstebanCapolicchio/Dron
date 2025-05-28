@@ -22,18 +22,20 @@ class ClienteUsuarioGUI:
 
         # Botones: sus nombres y sus acciones
         botones = [
-            ("Avanzar",         lambda: self.enviar_orden("--> Av")),
-            ("Retroceder",      lambda: self.enviar_orden("<-- Re")),
-            ("Subir",           lambda: self.enviar_orden(" A  Sub")),
-            ("Bajar",           lambda: self.enviar_orden(" V  Ab")),
-            ("Giro Izquierda",  lambda: self.enviar_orden("--A G_I")),
-            ("Giro Derecha",    lambda: self.enviar_orden("--V G_D")),
+            ("Avanzar",         lambda: self.enviar_orden("--> Av"),  (1,4)),
+            ("Retroceder",      lambda: self.enviar_orden("<-- Re"),  (3,4)),
+            ("Subir",           lambda: self.enviar_orden(" A  Sub"), (1,1)),
+            ("Bajar",           lambda: self.enviar_orden(" V  Ab"),  (2,1)),
+            ("Giro Izquierda",  lambda: self.enviar_orden("--A G_I"), (1,3)),
+            ("Giro Derecha",    lambda: self.enviar_orden("--V G_D"), (1,5)),
         ]
 
         # En diccionario de botones, agregar los botones
-        for texto, comando in botones:
+        for texto, comando, (fila, columna) in botones:
             btn = tk.Button(self.boton_frame, text=texto, width=18, command=comando)
-            btn.pack(side=tk.LEFT, padx=5)
+
+            btn.grid(row=fila, column=columna, padx=5, pady=5)
+
             self.botones_gui[texto] = (btn, comando)
 
         # Asocio teclas a botones y sus respectivas funciones
